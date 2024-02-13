@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import Navbar from './components/Navbar';
+import { Routes, Route} from 'react-router-dom';
+import HomePage from './components/HomePage';
+import SettingsPage from './components/SettingsPage';
+import BlogsPage from './components/BlogPage';
+// eslint-disable-next-line 
+import BlogCard from './components/BlogCard';
+import BlogInfo from './components/BlogInfo';
+import Bloglist from './components/Bloglist';
+import SearchBar from './components/SearchBar';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App-header">
+      My Blog Page
+        <Navbar />
+
+        <Routes>
+          <Route path='/' element={<HomePage />} />
+          <Route path='/settings' element={<SettingsPage />} />
+          <Route path='/blog/:id' element={<BlogsPage />} />
+          <Route path='/blogs' element={<BlogsPage />} />
+          <Route path='/blog/:id' element={<BlogInfo />} />
+          <Route path='/bloglist' element={<Bloglist />} />
+          <Route path='/search' element={<SearchBar />} />
+        </Routes>
     </div>
   );
 }
