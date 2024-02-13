@@ -27,7 +27,7 @@ function BlogsPage() {
 
     return (
         <div>
-            BlogsPage
+           <h1>Blogs Page</h1>
             <SearchBar />
             <BlogInfo />
             <Bloglist />
