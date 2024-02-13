@@ -16,7 +16,7 @@ function App() {
     <div className="App-header">
       My Blog Page
         <Navbar />
-
+{/* Definies routes my application can take */}
         <Routes>
           <Route path='/' element={<HomePage />} />
           <Route path='/settings' element={<SettingsPage />} />
