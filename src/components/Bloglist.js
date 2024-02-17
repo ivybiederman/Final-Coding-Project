@@ -1,32 +1,33 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from 'axios'; // Import axios
+import apiInstance from './api'; // Import apiInstance
 
 import BlogCard from "./BlogCard";
 
-function Bloglist() {
+function BlogList() {
+    const [blogs, setBlogs] = useState([]);
+
     useEffect(() => {
-        const getData = async () => {
+        const fetchData = async () => {
             try {
-                const res = await axios.get('https://65a0b515600f49256fb02c99.mockapi.io/blogs');
-                console.log(res.data); // Log the fetched data to the console
+                const fetchedBlogs = await apiInstance.getAllBlogs();
+                setBlogs(fetchedBlogs);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
         };
 
-        getData();
-    }, []); // Ensure useEffect runs only once after initial render by passing an empty dependency array
+        fetchData();
+    }, []);
 
     return (
         <div className="bloglist">
             Blogs
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
+            {blogs.map(blog => (
+                <BlogCard key={blog.id} blog={blog} />
+            ))}
         </div>
     );
 }
 
-export default Bloglist;
+export default BlogList;
