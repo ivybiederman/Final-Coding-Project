@@ -5,7 +5,7 @@ class Api {
         try {
             const response = await fetch(api_endpoint);
             const blogs = await response.json();
-            console.log("mock api data:", blogs);
+            // console.log("mock api data:", blogs);
             return blogs;
         } catch (error) {
             console.error("Error fetching blogs:", error);
@@ -13,34 +13,49 @@ class Api {
         }
     }
 
-    postToBlog = async (blogData) => {
+    postToBlog = async (blogTitleData, blogAuthorData) => {
+
+       
         try {
-            console.log("Posting to the blog...", blogData);
+            let newBlog = {
+                // "createdAt": "2024-01-11T04:47:13.573Z",
+                "title": blogTitleData,
+                "author": "Marc Watsica",
+                // "picture": "https://cloudflare",
+            }
+            console.log("Posting to the blog...", newBlog);
+           
             const response = await fetch(api_endpoint, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(blogData)
+                body: JSON.stringify(newBlog)
             });
-            const newBlog = await response.json();
-            console.log("New blog created:", newBlog);
-            return newBlog;
+            const newBlogResponse = await response.json();
+            console.log("New blog created:", newBlogResponse);
+            return newBlogResponse;
         } catch (error) {
             console.error("Error posting to blog:", error);
             return null;
         }
     }
 
-    updateBlog = async (blogId, updatedData) => {
+    updateBlog = async (blogId, UpdatedTitleData) => {
         try {
-            console.log("Updating blog...", blogId, updatedData);
+            let updatedBlogData = {
+                // "createdAt": "2024-01-11T04:47:13.573Z",
+                "title": UpdatedTitleData,
+                "author": "Marc Watsica",
+                // "picture": "https://cloudflare",
+            }
+            console.log("Updating blog...", blogId, updatedBlogData);
             const response = await fetch(`${api_endpoint}/${blogId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(updatedData)
+                body: JSON.stringify(updatedBlogData)
             });
             const updatedBlog = await response.json();
             console.log("Updated blog:", updatedBlog);
@@ -54,15 +69,14 @@ class Api {
     deleteBlog = async (blogId) => {
         try {
             console.log("Deleting blog...", blogId);
-            const response = await fetch(`${api_endpoint}/${blogId}`, {
+            await fetch(`${api_endpoint}/${blogId}`, {
                 method: 'DELETE'
             });
-            const deletedBlog = await response.json();
-            console.log("Deleted blog:", deletedBlog);
-            return deletedBlog;
+            console.log("Blog deleted successfully.");
+            return true; // Return a success message
         } catch (error) {
             console.error("Error deleting blog:", error);
-            return null;
+            return false; // Return false to indicate failure
         }
     }
 }

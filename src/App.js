@@ -12,35 +12,82 @@ import BlogCard from './components/BlogCard';
 import BlogInfo from './components/BlogInfo';
 import Bloglist from './components/Bloglist';
 import SearchBar from './components/SearchBar';
+import { Button, Card } from 'react-bootstrap';
 
 import Api from './components/api';
+import apiInstance from './components/api';
+import UpdateBlog from './components/UpdateBlog';
 
 function App() {
 // functions of the app can go here
 const [blogs, setBlogs] = useState([]);
 
 const gettingBlogData = async () => {
+  console.log("Getting blog data...");
   let myBlogData = await Api.getAllBlogs();
   setBlogs(myBlogData)
 }
 
+const handleCreateButton = async (event) => {
+  // console.clear();
+  event.preventDefault(); //prevent the default behaviour of a form, ie refreshing the page.
+  console.log("creating things...",event)
+
+  const blogNameInput = document.getElementById("new-blog-name").value;
+  console.log("new input data???", blogNameInput);
+
+await apiInstance.postToBlog(blogNameInput)
+
+gettingBlogData();
+}
+const handleUpdateButton = async (blogIdToUpdate, updatedData) => {
+  console.log("Updating blog...", blogIdToUpdate, updatedData);
+  const updatedBlog = await apiInstance.updateBlog(blogIdToUpdate, updatedData);
+  if (updatedBlog) {
+    console.log("Blog updated successfully:", updatedBlog);
+    gettingBlogData();
+  } else {
+    console.error("Failed to update blog.");
+  }
+}
+const handleDeleteButton = async (blogIdToDelete) => {
+  console.log("Deleting blog...", blogIdToDelete);
+  const deletionResult = await apiInstance.deleteBlog(blogIdToDelete);
+  if (deletionResult) {
+    console.log("Blog deleted successfully.");
+    gettingBlogData();
+  } else {
+    console.error("Failed to delete blog.");
+  }
+}
 useEffect(() => {
   // Update the document title using the browser API
   gettingBlogData();
 }, []);
 
+
 console.log("updated state?", blogs);
   return (
+    <>
+    <Card id="new-blog">
+    <h2>New Blog</h2>
+    <input type="text" id="new-blog-name" className="form-control"/><br/>
+    <Button onClick={handleCreateButton} id="create-new-blog" className="btn btn-primary form-control">Create</Button>
+   </Card>
+    <SearchBar/>
     <div className="App-header">
       My Blog Page
         <Navbar />
 {/* Definies routes my application can take */}
-{blogs.map((blog, index)=>(
+{blogs.reverse().map((blog, index)=>(
 <div key={index}>
 Test
 
 <h1>{blog.title}</h1>
+<h3>{blog.id}</h3>
 <img src={blog.picture} />
+<UpdateBlog blogId={blog.id} gettingBlogData={gettingBlogData}/>
+<Button onClick={()=>handleDeleteButton(blog.id)} id="delete-new-blog" className="btn btn-danger form-control">Delete</Button>
   </div>
 ))}
 
@@ -54,6 +101,7 @@ Test
           <Route path='/search' element={<SearchBar />} />
         </Routes>
     </div>
+    </>
   );
 }
 
