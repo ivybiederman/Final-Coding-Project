@@ -1,9 +1,10 @@
-import React from 'react'
+import React from 'react';
 
+// Functional component representing the home page
 function HomePage(){
     return (
-        <div>HomePage</div>
-    )
+        <div>HomePage</div> // Render the content of the home page
+    );
 }
 
-export default HomePage
+export default HomePage; // Export the HomePage component

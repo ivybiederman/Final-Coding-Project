@@ -1,6 +1,7 @@
 const api_endpoint = "https://65a0b515600f49256fb02c99.mockapi.io/blogs";
 
 class Api {
+    // Method to fetch all blogs from the API
     getAllBlogs = async () => {
         try {
             const response = await fetch(api_endpoint);
@@ -13,18 +14,14 @@ class Api {
         }
     }
 
+    // Method to post a new blog to the API
     postToBlog = async (blogTitleData, blogAuthorData) => {
-
-       
         try {
             let newBlog = {
-                // "createdAt": "2024-01-11T04:47:13.573Z",
                 "title": blogTitleData,
                 "author": "Marc Watsica",
-                // "picture": "https://cloudflare",
             }
             console.log("Posting to the blog...", newBlog);
-           
             const response = await fetch(api_endpoint, {
                 method: 'POST',
                 headers: {
@@ -41,13 +38,12 @@ class Api {
         }
     }
 
+    // Method to update an existing blog in the API
     updateBlog = async (blogId, UpdatedTitleData) => {
         try {
             let updatedBlogData = {
-                // "createdAt": "2024-01-11T04:47:13.573Z",
                 "title": UpdatedTitleData,
                 "author": "Marc Watsica",
-                // "picture": "https://cloudflare",
             }
             console.log("Updating blog...", blogId, updatedBlogData);
             const response = await fetch(`${api_endpoint}/${blogId}`, {
@@ -66,6 +62,7 @@ class Api {
         }
     }
 
+    // Method to delete a blog from the API
     deleteBlog = async (blogId) => {
         try {
             console.log("Deleting blog...", blogId);

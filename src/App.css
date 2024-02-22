@@ -1,27 +1,31 @@
+/* CSS file for styling the application */
+
+/* Styling for the body */
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin: 0; /* Remove default margin */
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif; /* Specify font family */
+  -webkit-font-smoothing: antialiased; /* Smoothing for webkit browsers */
+  -moz-osx-font-smoothing: grayscale; /* Smoothing for macOS browsers */
 }
 
+/* Styling for the header of the application */
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  background-color: #282c34; /* Background color */
+  min-height: 100vh; /* Minimum height of the header */
+  display: flex; /* Use flexbox */
+  flex-direction: column; /* Arrange children in a column */
+  align-items: center; /* Center alignment for items */
+  justify-content: center; /* Center alignment for content */
+  font-size: calc(10px + 2vmin); /* Dynamic font size */
+  color: white; /* Text color */
 }
 
+/* Styling for anchor tags */
 a {
-  text-decoration: none;
+  text-decoration: none; /* Remove underline from anchor tags */
 }
 
+/* Styling for the blog list */
 .bloglist {
-  border: solid blue 2px;
+  border: solid blue 2px; /* Border style for the blog list */
 }
